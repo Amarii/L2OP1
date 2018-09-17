@@ -1,0 +1,17 @@
+{
+  "name": "HapiWebsite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "hapi": "^17.5.4",
+    "hoek": "^5.0.4"
+  }
+}
