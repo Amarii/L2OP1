@@ -1,42 +1,17 @@
-'use strict';
+'use strict'
 
 const Hapi = require('hapi')
+const Hoek = require('hoek')
 const Settings = require('./settings')
+const Routes = require('./lib/routes');
 
-const server = new Hapi.server({
-    port: Settings.port
+const server = new Hapi.Server()
+server.connection({ port: Settings.port })
+
+server.route(Routes);
+
+server.start((err) => {
+  Hoek.assert(!err, err)
+
+  console.log(`Server running at: ${server.info.uri}`)
 })
-
-//Routes
-
-server.route({
-    method: 'GET',
-    path: '/',
-    handler: (request, h) => {
-        return 'hello, welcome'
-    } 
-})
-
-server.route({
-    method: 'GET',
-    path: '/{name}',
-    handler: (request, h) => {
-        return 'Hello, ' + encodeURIComponent(request.params.name) + '!'
-    }
-})
-
-
-//server start
-const init = async () => {
-
-    await server.start();
-    console.log(`Server running at: ${server.info.uri}`)
-}
-
-process.on('unhandledRejection', (err) => {
-
-    console.log(err)
-    process.exit(1)
-})
-
-init()
