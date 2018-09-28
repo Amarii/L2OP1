@@ -14,3 +14,5 @@
 Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/drawings', 'PagesController@drawings');
+
+Route::resource('drawings', 'DrawingController');
