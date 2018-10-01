@@ -5,7 +5,7 @@
     @if(count($drawings) > 0)
         <ul class="list-group">
             @foreach($drawings as $drawing)
-                <li class="list-group-item">{{$drawing}}</li>
+                <li class="list-group-item list-group-item-action">{{$drawing}}</li>
             @endforeach
         </ul>
     @endif

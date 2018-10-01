@@ -4,9 +4,9 @@
     <h1>Drawings</h1>
     @if(count($drawings) > 0)
     @foreach($drawings as $drawing)
-        <div class="well">
+        <div class="col-md-4 list-group-item list-group-item-action">
         <h3><a href="/drawings/{{$drawing->id}}">{{$drawing->name}}</a></h3>
-        <small>Posted on {{$drawing->created_at}}</small>
+        
         </div>
     @endforeach
 

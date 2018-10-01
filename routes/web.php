@@ -16,3 +16,6 @@ Route::get('/about', 'PagesController@about');
 Route::get('/drawings', 'PagesController@drawings');
 
 Route::resource('drawings', 'DrawingController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

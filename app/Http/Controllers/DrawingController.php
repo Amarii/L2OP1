@@ -15,7 +15,7 @@ class DrawingController extends Controller
      */
     public function index()
     {
-        $drawing = Drawing::orderBy('name','asc')->get();
+        $drawing = Drawing::orderBy('created_at','desc')->get();
         return view('drawings.index')->with('drawings', $drawing);
     }
 
@@ -26,7 +26,7 @@ class DrawingController extends Controller
      */
     public function create()
     {
-        //
+        return view('drawings.create');
     }
 
     /**
@@ -37,7 +37,19 @@ class DrawingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required'
+        ]);
+
+        // Add Drawing
+        $drawing = new Drawing;
+        $drawing->name = $request->input('name');
+        $drawing->description = $request->input('description');
+        $drawing->price = $request->input('price');
+        $drawing->save();
+
+        return redirect('/drawings')->with('success', 'Drawing Added');
     }
 
     /**
@@ -58,9 +70,10 @@ class DrawingController extends Controller
      * @param  \App\Drawing  $drawing
      * @return \Illuminate\Http\Response
      */
-    public function edit(Drawing $drawing)
+    public function edit($id)
     {
-        //
+        $drawing = Drawing::find($id);
+        return view('drawings.edit')->with('drawing',$drawing);
     }
 
     /**
@@ -72,7 +85,19 @@ class DrawingController extends Controller
      */
     public function update(Request $request, Drawing $drawing)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required'
+        ]);
+
+        // Add Drawing
+        $drawing = Drawing::find($drawing->id);
+        $drawing->name = $request->input('name');
+        $drawing->description = $request->input('description');
+        $drawing->price = $request->input('price');
+        $drawing->save();
+
+        return redirect('/drawings')->with('success', 'Drawing Updated');
     }
 
     /**
@@ -83,6 +108,8 @@ class DrawingController extends Controller
      */
     public function destroy(Drawing $drawing)
     {
-        //
+        $drawing =Drawing::find($drawing->id);
+        $drawing->delete();
+        return redirect('/drawings')->with('error', 'Drawing Deleted');
     }
 }
