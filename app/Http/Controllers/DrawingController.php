@@ -3,11 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Drawing;
+use App\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Auth;
 
 
 class DrawingController extends Controller
 {
+
+        /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -61,6 +75,8 @@ class DrawingController extends Controller
     public function show($id)
     {
         $drawing = Drawing::find($id);
+      
+       
         return view('drawings.show')->with('drawing',$drawing);
     }
 
