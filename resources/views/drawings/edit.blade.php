@@ -2,8 +2,7 @@
 
 @section('content')
     <h1>Edit Drawing</h1>
-    
-    {!! Form::open(['action' => ['DrawingController@update', $drawing->id], 'method' => 'Post']) !!}
+    {!! Form::open(['action' => ['DrawingController@update', $drawing->id], 'method' => 'Post', 'enctype' => 'multipart/form-data']) !!}
         <div class="form-group">
             {{Form::label('name', 'Name')}}
             {{Form::text('name', $drawing->name, ['class' => 'form-control', 'placeholder' => 'Drawing Name'])}}
