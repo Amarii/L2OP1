@@ -54,7 +54,8 @@ class DrawingController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'description' => 'required',
-            'image' => 'required'
+            'price' =>'required',
+            'image' => 'required|image:jpg,png'
         ]);
            // dd($request->all());
 
@@ -68,10 +69,10 @@ class DrawingController extends Controller
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $fileExtension = $request->file('image')->getClientOriginalExtension();
             $fileNameToStore = $fileName.'_'.time().'.'.$fileExtension;
-            $path = $request->file('image')->storeAs('public.images', $fileNameToStore);
+            $path = $request->file('image')->storeAs('public/images', $fileNameToStore);
         }
         else {
-            $fileNameToStore = 'nofilename.jpg';
+            $fileNameToStore = 'nofilename.png';
         }
 
         // Add Drawing
@@ -122,14 +123,31 @@ class DrawingController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'price' => 'required'
         ]);
-
+        if($request->hasFile('image')){
+          
+            //get file name
+            $fileNameWithExt = $request->file('image')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $fileExtension = $request->file('image')->getClientOriginalExtension();
+            $fileNameToStore = $fileName.'_'.time().'.'.$fileExtension;
+            $path = $request->file('image')->storeAs('public/images', $fileNameToStore);
+        }
+        else {
+            $fileNameToStore = 'nofilename.png';
+        }
         // Add Drawing
         $drawing = Drawing::find($drawing->id);
         $drawing->name = $request->input('name');
         $drawing->description = $request->input('description');
         $drawing->price = $request->input('price');
+        if($fileNameToStore == 'nofilename.png'){}
+            else{
+                $drawing->image = $fileNameToStore;
+            }
+        
         $drawing->save();
 
         return redirect('/drawings')->with('success', 'Drawing Updated');
