@@ -3,22 +3,13 @@
 @section('content')
     <h1>Drawings</h1>
     @if(count($drawings) > 0)
-
-       
-            <div class="card-columns" style="column-count:5">
     @foreach($drawings as $drawing)
-      
-      
-        <div class="card">
-            <a href="/drawings/{{$drawing->id}}"><img src="/storage/images/{{$drawing->image}}" style="width:100%" ></a>
-                    
-                    </div>
+        <div class="col-md-4 list-group-item list-group-item-action">
+        <h3><a href="/drawings/{{$drawing->id}}">{{$drawing->name}}</a></h3>
         
-     
-        
+        </div>
     @endforeach
-    </div>
-  
+
     @else
     <p>No Drawings</p>
     @endif

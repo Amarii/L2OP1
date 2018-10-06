@@ -15,8 +15,6 @@ Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/drawings', 'PagesController@drawings');
 
-Route::get('/admin','@AdminController@index');
-
 Route::resource('drawings', 'DrawingController');
 
 Auth::routes();
