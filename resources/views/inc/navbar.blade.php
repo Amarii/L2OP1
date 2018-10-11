@@ -10,10 +10,17 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                    
+                
+                @if(Auth::guard('admin')->user() || Route::currentRouteName() == 'admin.login')
                 <li class="nav-item">
-                  <a class="nav-link" href="/">Home </a>
-                </li>
+                    <a class="nav-link" href="/admin">Home </a>
+                  </li>
+                @else
+                <li class="nav-item">
+                    <a class="nav-link" href="/home">Home </a>
+                  </li>
+         @endif
+              
                 <li class="nav-item">
                   <a class="nav-link" href="/about">About</a>
                 </li>

@@ -15,7 +15,18 @@ Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/drawings', 'PagesController@drawings');
 
-Route::resource('drawings', 'DrawingController');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('store', 'AdminController');
+
+Route::prefix('admin')->group(function(){
+    Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+    Route::post('/login', 'Auth\AdminLoginController@Login')->name('admin.login.submit');
+    Route::get('/', 'AdminController@index')->name('admin');
+    Route::get('/drawings','AdminController@index');
+    Route::get('/drawings/create', 'AdminController@create');
+
+});
+

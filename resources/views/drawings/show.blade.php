@@ -13,6 +13,7 @@
             @if($drawing->sold == 1)
             
             @endif
+            @endif
             <div style="margin-bottom:10px">
 <a href="/drawings/{{$drawing->id}}/edit" class="btn btn-standard float-left">Edit</a>
 {!!Form::open(['action' => ['DrawingController@destroy', $drawing->id], 'method' => 'POST', 'class' => 'float-left'])!!}
@@ -20,7 +21,7 @@
     {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
 {!!Form::close()!!}
 <div>
-@endif
+
             <div style="text-align:center">
                 
          @if(Auth::user() && Auth::user()->user_type == 0)

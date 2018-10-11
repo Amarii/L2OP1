@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Drawing;
+use App\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Auth;
 
 class PagesController extends Controller
 {
@@ -17,10 +20,7 @@ class PagesController extends Controller
     }
 
     public function drawings(){
-        $drawings = array(
-            'title' => 'Drawings',
-            'drawings' => ['drawing1','drawing2','drawing3']
-        );
-        return view('pages.drawings')->with($drawings);
+        $drawing = Drawing::orderBy('created_at','desc')->get();
+        return view('drawings.index')->with('drawings', $drawing);
     }
 }

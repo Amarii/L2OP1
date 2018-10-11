@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDrawingsTable extends Migration
+class CreateAdminsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateDrawingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('drawings', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('description');
-            $table->string('price');
-            $table->boolean('sold')->default(0);
+            $table->string('name')->unique();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateDrawingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('drawings');
+        Schema::dropIfExists('admins');
     }
 }

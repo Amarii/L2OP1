@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Upload Drawing</h1>
-    {!! Form::open(['action' => 'DrawingController@store', 'method' => 'Post', 'enctype' => 'multipart/form-data']) !!}
+    {!! Form::open(['action' => 'AdminController@store', 'method' => 'Post', 'enctype' => 'multipart/form-data']) !!}
         <div class="form-group">
             {{Form::label('name', 'Name')}}
             {{Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Drawing Name'])}}
