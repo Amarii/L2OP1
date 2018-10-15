@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-laravel">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
+        <a class="navbar-brand" href="{{ url('/admin') }}">
             {{ config('app.name', 'Laravel') }}
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -15,18 +15,26 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/admin">Home </a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/admin/drawings">Drawings</a>
+                  </li>
                 @else
                 <li class="nav-item">
                     <a class="nav-link" href="/home">Home </a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/drawings">Drawings</a>
+                  </li>
+                  
          @endif
               
-                <li class="nav-item">
-                  <a class="nav-link" href="/about">About</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/drawings">Drawings</a>
-                </li>
+
               
         </ul>
 
@@ -43,8 +51,8 @@
                         @endif
                     </li>
                 @else
-            @if(Auth::user()->user_type == 1)  
-                <a class="nav-link" href="/drawings/create">Add Drawing</a>
+            @if(Auth::guard('admin')->user())  
+                <a class="nav-link" href="/admin/create">Add Drawing</a>
             @endif
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

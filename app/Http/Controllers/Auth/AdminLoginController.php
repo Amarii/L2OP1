@@ -26,7 +26,7 @@ class AdminLoginController extends Controller
         //try to login
         if(Auth::guard('admin')->attempt(['name' => $request->name, 'password' => $request->password], $request->remember)){
             //if successful
-            return redirect()->intended(route('admin'));
+            return redirect('admin')->with('success', 'Your are Logged in');
         };
 
         return redirect()->back()->withInput($request->only('name','password'));

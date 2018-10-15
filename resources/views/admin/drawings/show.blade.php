@@ -10,20 +10,17 @@
             <p>Price: €{{$drawing->price}}</p>
 
 
-            @if($drawing->sold == 1)
-            sold
-            @endif
-
             <div style="margin-bottom:10px">
-
+<a href="/admin/drawings/{{$drawing->id}}/edit" class="btn btn-standard float-left">Edit</a>
+{!!Form::open(['action' => ['AdminController@destroy', $drawing->id], 'method' => 'POST', 'class' => 'float-left'])!!}
+    {{Form::hidden('_method', 'DELETE')}}
+    {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+{!!Form::close()!!}
 <div>
 
             <div style="text-align:center">
                 
-         @if(Auth::user() && Auth::user()->user_type == 0)
- <a style="margin-bottom:10px" class="btn btn-success">Contact Artist</a>
-
-         @endif
+sdfsdf
          
     </div>
     <br>

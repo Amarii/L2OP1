@@ -19,14 +19,19 @@ Route::get('/drawings', 'PagesController@drawings');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('store', 'AdminController');
+//Route::resource('store', 'AdminController');
+//Route::resource('destroy', 'AdminController');
+
+Route::resource('admin/drawings', 'AdminController');
+
+Route::resource('drawings', 'DrawingController', ['except' => 'edit']);
 
 Route::prefix('admin')->group(function(){
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@Login')->name('admin.login.submit');
     Route::get('/', 'AdminController@index')->name('admin');
-    Route::get('/drawings','AdminController@index');
-    Route::get('/drawings/create', 'AdminController@create');
+    Route::get('/create', 'AdminController@create');
+    Route::get('/drawings', 'AdminController@drawings');
 
 });
 

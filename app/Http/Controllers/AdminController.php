@@ -30,7 +30,18 @@ class AdminController extends Controller
     public function index()
     {
         $drawing = Drawing::orderBy('created_at','desc')->get();
-        return view('drawings.index')->with('drawings', $drawing);
+        return view('admin.app')->with('drawings', $drawing);;
+    }
+
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function drawings()
+    {
+        $drawing = Drawing::orderBy('created_at','desc')->get();
+        return view('admin.drawings.index')->with('drawings', $drawing);
     }
 
     /**
@@ -40,7 +51,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('drawings.create');
+        return view('admin.drawings.create');
     }
 
     /**
@@ -83,7 +94,7 @@ class AdminController extends Controller
         $drawing->image = $fileNameToStore;
         $drawing->save();
 
-        return redirect('/drawings')->with('success', 'Drawing Added');
+        return redirect('admin/drawings')->with('success', 'Drawing Added');
     }
 
     /**
@@ -97,7 +108,7 @@ class AdminController extends Controller
         $drawing = Drawing::find($id);
       
        
-        return view('drawings.show')->with('drawing',$drawing);
+        return view('admin.drawings.show')->with('drawing',$drawing);
     }
 
     /**
@@ -109,7 +120,7 @@ class AdminController extends Controller
     public function edit($id)
     {
         $drawing = Drawing::find($id);
-        return view('drawings.edit')->with('drawing',$drawing);
+        return view('admin.drawings.edit')->with('drawing',$drawing);
     }
 
     /**
@@ -150,7 +161,7 @@ class AdminController extends Controller
         
         $drawing->save();
 
-        return redirect('/drawings')->with('success', 'Drawing Updated');
+        return redirect('/admin/drawings')->with('success', 'Drawing Updated');
     }
 
     /**
@@ -163,6 +174,6 @@ class AdminController extends Controller
     {
         $drawing =Drawing::find($drawing->id);
         $drawing->delete();
-        return redirect('/drawings')->with('error', 'Drawing Deleted');
+        return redirect('/admin/drawings')->with('error', 'Drawing Deleted');
     }
 }
