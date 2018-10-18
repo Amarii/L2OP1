@@ -15,7 +15,6 @@ Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/drawings', 'PagesController@drawings');
 
-
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -24,14 +23,21 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('admin/drawings', 'AdminController');
 
-Route::resource('drawings', 'DrawingController', ['except' => 'edit']);
+Route::resource('drawings', 'DrawingController');
+
 
 Route::prefix('admin')->group(function(){
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@Login')->name('admin.login.submit');
     Route::get('/', 'AdminController@index')->name('admin');
+    Route::get('/drawings','AdminController@index');
     Route::get('/create', 'AdminController@create');
-    Route::get('/drawings', 'AdminController@drawings');
 
 });
+
+Route::any('isActive/{id}', [
+    'uses' => 'AdminController@isActive'
+  ]);
+
+
 

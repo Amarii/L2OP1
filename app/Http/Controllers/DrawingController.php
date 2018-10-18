@@ -25,7 +25,7 @@ class DrawingController extends Controller
      */
     public function index()
     {
-        $drawing = Drawing::orderBy('created_at','desc')->get();
+        $drawing = Drawing::orderBy('created_at','desc')->get()->where('active', true);
         return view('drawings.index')->with('drawings', $drawing);
     }
 
@@ -42,9 +42,8 @@ class DrawingController extends Controller
        
         return view('drawings.show')->with('drawing',$drawing);
     }
-    public function create()
-    {
-        return redirect('drawings');
-    }
+
+
+
 
 }

@@ -164,6 +164,21 @@ class AdminController extends Controller
         return redirect('/admin/drawings')->with('success', 'Drawing Updated');
     }
 
+    public function isActive($id)
+    {
+        $drawing = Drawing::find($id);
+
+        if($drawing->active == false){
+            $drawing->active = true;
+            $drawing->save();
+        }
+        else{
+            $drawing->active = false;
+            $drawing->save();
+        }
+        return redirect('/admin/drawings')->with('success', 'Drawing Updated');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

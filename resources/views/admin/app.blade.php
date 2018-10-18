@@ -22,22 +22,29 @@
                             <div class="row">
                             
                     @foreach($drawings as $drawing)
-                    
+                    @if($drawing->active == false)
+                    @php
+                    $active = 'Deactive'
+                    @endphp
+                    @else
+                    @php
+                    $active = 'Active'
+                    @endphp
+                    @endif
+
                       <div class="card">
                     
 
                         
                     <div class="col-sm">
-                            <a href="/admin/drawings/{{$drawing->id}}"><img src="/storage/images/{{$drawing->image}}" style="width:10%" ></a>
+                     
                             
-                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-secondary active">
-                                      <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
-                                    </label>
-                                    <label class="btn btn-secondary">
-                                      <input type="radio" name="options" id="option2" autocomplete="off"> Deactive
-                                    </label>
-                                  </div>
+
+                            {!! Form::open(['action' => ['AdminController@isActive', $drawing->id], 'method' => 'Post', 'enctype' => 'multipart/form-data']) !!}
+                            <a href="/admin/drawings/{{$drawing->id}}"><img src="/storage/images/{{$drawing->image}}" style="width:10%" ></a>
+                            {{Form::submit($active, ['class'=>'btn btn-primary'])}}
+                        {!! Form::close() !!}
+                           
                     </div>
                      
                     </div>

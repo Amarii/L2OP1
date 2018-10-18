@@ -11,7 +11,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 
-                @if(Auth::guard('admin')->user() || Route::currentRouteName() == 'admin.login')
+                @if(Auth::guard('admin')->user())
                 <li class="nav-item">
                     <a class="nav-link" href="/admin">Home </a>
                   </li>
@@ -19,7 +19,7 @@
                     <a class="nav-link" href="/about">About</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/admin/drawings">Drawings</a>
+                    <a class="nav-link" href="/drawings">Drawings</a>
                   </li>
                 @else
                 <li class="nav-item">
