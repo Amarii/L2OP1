@@ -11,7 +11,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 
-                @if(Auth::guard('admin')->user())
+               
                 <li class="nav-item">
                     <a class="nav-link" href="/admin">Home </a>
                   </li>
@@ -21,18 +21,20 @@
                   <li class="nav-item">
                     <a class="nav-link" href="/drawings">Drawings</a>
                   </li>
-                @else
-                <li class="nav-item">
-                    <a class="nav-link" href="/home">Home </a>
+                  <li>
+                      <div>
+                         
+                        {!! Form::open(['action' => ['DrawingsController@search', 'input'], 'class'=>'form navbar-form navbar-right searchform']) !!}
+                        {!! Form::text('search', null,
+                                               array('required',
+                                                    'class'=>'form-control',
+                                                    'placeholder'=>'Search')) !!}
+                   
+                     {!! Form::close() !!}
+                      </div>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/about">About</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/drawings">Drawings</a>
-                  </li>
-                  
-         @endif
+                
+               
               
 
               
@@ -51,7 +53,7 @@
                         @endif
                     </li>
                 @else
-            @if(Auth::guard('admin')->user())  
+            @if(Auth::user()->is_admin == 1)
                 <a class="nav-link" href="/admin/create">Add Drawing</a>
             @endif
                     <li class="nav-item dropdown">

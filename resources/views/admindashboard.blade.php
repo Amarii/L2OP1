@@ -22,15 +22,7 @@
                             <div class="row">
                             
                     @foreach($drawings as $drawing)
-                    @if($drawing->active == false)
-                    @php
-                    $active = 'Deactive'
-                    @endphp
-                    @else
-                    @php
-                    $active = 'Active'
-                    @endphp
-                    @endif
+
 
                       <div class="card">
                     
@@ -40,10 +32,22 @@
                      
                             
 
-                            {!! Form::open(['action' => ['AdminController@isActive', $drawing->id], 'method' => 'Post', 'enctype' => 'multipart/form-data']) !!}
+                            {!! Form::open(['action' => ['DrawingsController@isActive', $drawing->id], 'method' => 'Post', 'enctype' => 'multipart/form-data']) !!}
                             <a href="/admin/drawings/{{$drawing->id}}"><img src="/storage/images/{{$drawing->image}}" style="width:10%" ></a>
-                            {{Form::submit($active, ['class'=>'btn btn-primary'])}}
-                        {!! Form::close() !!}
+                            {{Form::submit($drawing->is_active, ['class'=>'btn btn-primary'])}}
+                            <a href="/drawings/{{$drawing->id}}/edit" class="btn btn-standard float-left">Edit</a>
+                            {!!Form::close()!!}
+                            
+
+                            
+          
+                       
+                        {!!Form::open(['action' => ['DrawingsController@destroy', $drawing->id], 'method' => 'POST', 'class' => 'float-left'])!!}
+                            {{Form::hidden('_method', 'DELETE')}}
+                            {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                        {!!Form::close()!!}
+                    
+                        
                            
                     </div>
                      

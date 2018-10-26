@@ -11,33 +11,28 @@
 |
 */
 
-Route::get('/', 'PagesController@index');
-Route::get('/about', 'PagesController@about');
-Route::get('/drawings', 'PagesController@drawings');
-
-Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
-
-//Route::resource('store', 'AdminController');
-//Route::resource('destroy', 'AdminController');
-
-Route::resource('admin/drawings', 'AdminController');
-
-Route::resource('drawings', 'DrawingController');
-
-
-Route::prefix('admin')->group(function(){
-    Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
-    Route::post('/login', 'Auth\AdminLoginController@Login')->name('admin.login.submit');
-    Route::get('/', 'AdminController@index')->name('admin');
-    Route::get('/drawings','AdminController@index');
-    Route::get('/create', 'AdminController@create');
-
+Route::get('/', function () {
+    return view('pages.index');
+});
+Route::get('/about', function () {
+    return view('pages.about');
 });
 
-Route::any('isActive/{id}', [
-    'uses' => 'AdminController@isActive'
-  ]);
+// Resources
+Route::resource('drawings', 'DrawingsController');
+Route::get('drawings/search', 'DrawingsController@search');
 
 
+Auth::routes();
 
+Route::get('/drawings', 'DrawingsController@index')->name('drawings');
+Route::get('/home', 'UserController@index')->name('home');
+
+Route::group(['middleware' => ['auth', 'admin']], function(){
+    Route::get('/admin', 'AdminController@index')->name('admin_dashboard');
+    Route::get('/admin/create', 'DrawingsController@create')->name('create');
+    Route::any('isActive/{id}', [
+        'uses' => 'DrawingsController@isActive'
+      ]);
+
+});

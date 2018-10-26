@@ -13,6 +13,10 @@
             @if($drawing->sold == 1)
             sold
             @endif
+            <div class='like_system'>
+                    <a href="#" class ="like">Like</a> / 
+                    <a href="#" class ="like">Dislike</a>
+            </div>
 
             <div style="margin-bottom:10px">
 
@@ -20,9 +24,20 @@
 
             <div style="text-align:center">
                 
-         @if(Auth::user() && Auth::user()->user_type == 0)
+         @if(Auth::user() && Auth::user()->is_admin == 0)
  <a style="margin-bottom:10px" class="btn btn-success">Contact Artist</a>
 
+                @else
+                @if(Auth::user() && Auth::user()->is_admin == 1)
+
+                <div style="margin-bottom:10px">
+                                <a href="/drawings/{{$drawing->id}}/edit" class="btn btn-standard float-left">Edit</a>
+                                {!!Form::open(['action' => ['DrawingsController@destroy', $drawing->id], 'method' => 'POST', 'class' => 'float-left'])!!}
+                                    {{Form::hidden('_method', 'DELETE')}}
+                                    {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                                {!!Form::close()!!}
+                                <div>
+                                        @endif
          @endif
          
     </div>
