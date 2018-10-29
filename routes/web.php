@@ -20,7 +20,7 @@ Route::get('/about', function () {
 
 // Resources
 Route::resource('drawings', 'DrawingsController');
-Route::get('drawings/search', 'DrawingsController@search');
+Route::post('drawings/search', 'DrawingsController@search');
 
 
 Auth::routes();
