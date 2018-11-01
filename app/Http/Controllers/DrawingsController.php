@@ -194,8 +194,37 @@ class DrawingsController extends Controller
         return redirect('/drawings')->with('error', 'Drawing Deleted');
     }
 
-    public function search($search)
+    public function search(Request $request)
     {
-        $drawing = Drawing::where('name', $search)->get();
+        $search = $request->input('name');
+        $filter = $request->input('price');
+
+
+        if($search != ''){
+            $drawings = Drawing::where('name', 'LIKE', '%' .$search. '%')->orWhere('price', $search)->where('is_active', 'Active')->get();
+        }
+       else{
+           $drawings = [];
+       }
+     
+       return view('drawings.index')->with('drawings', $drawings);
+
+
+    }
+
+    public function filter(Request $request)
+    {
+       
+        $filter = $request->input('filter');
+
+
+      
+            $drawings = Drawing::where('price', '<=', $filter)->where('is_active', 'Active')->get();
+      
+
+     
+       return view('drawings.index')->with('drawings', $drawings);
+
+
     }
 }

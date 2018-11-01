@@ -24,13 +24,18 @@
                   <li>
                       <div>
                          
-                        {!! Form::open(['action' => ['DrawingsController@search', 'input'], 'class'=>'form navbar-form navbar-right searchform']) !!}
-                        {!! Form::text('search', null,
-                                               array('required',
-                                                    'class'=>'form-control',
-                                                    'placeholder'=>'Search')) !!}
-                   
-                     {!! Form::close() !!}
+                        {!! Form::open(['action' => 'DrawingsController@search', 'method' => 'Post', 'enctype' => 'multipart/form-data']) !!}
+                        <div class="form-group">
+                            
+                            {{Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Drawing Name / Price'])}}
+                            
+  
+                       
+                                
+                    
+                
+        
+                    {!! Form::close() !!}
                       </div>
                   </li>
                 
@@ -51,6 +56,8 @@
                         @if (Route::has('register'))
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         @endif
+                                                  
+                        </div>
                     </li>
                 @else
             @if(Auth::user()->is_admin == 1)
