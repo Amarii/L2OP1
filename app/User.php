@@ -32,7 +32,13 @@ class User extends Authenticatable
         return $this->is_admin;
     }
 
-    public function likes(){
-        return $this->hasMany('App\Likes');
+    
+        /**
+ * Get all of favorite posts for the user.
+ */
+    public function favorites(){
+
+        return $this->belongsToMany(Drawing::class, 'favorites', 'user_id', 'drawing_id')->withTimeStamps();
     }
+
 }

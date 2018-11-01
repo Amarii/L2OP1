@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -24,5 +25,23 @@ class UserController extends Controller
     public function index()
     {
         return view('dashboard');
+    }
+
+    public function myFavorites()
+{
+    $myFavorites = Auth::user()->favorites;
+
+    return view('pages.my_favorites', compact('myFavorites'));
+}
+
+    public function myInfo()
+    {
+        $myInfo = Auth::user();
+        return view('pages.my_info', compact('myInfo'));
+    }
+
+    public function editMyInfo()
+    {
+        
     }
 }

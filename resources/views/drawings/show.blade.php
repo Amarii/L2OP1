@@ -13,10 +13,7 @@
             @if($drawing->sold == 1)
             sold
             @endif
-            <div class='like_system'>
-                    <a href="#" class ="like">Like</a> / 
-                    <a href="#" class ="like">Dislike</a>
-            </div>
+
 
             <div style="margin-bottom:10px">
 

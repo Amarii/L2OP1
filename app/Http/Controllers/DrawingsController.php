@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Drawing;
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Auth;
+//use App\Http\Controllers\Auth;
+use Auth;
 
 class DrawingsController extends Controller
 {
@@ -213,18 +214,33 @@ class DrawingsController extends Controller
     }
 
     public function filter(Request $request)
-    {
-       
-        $filter = $request->input('filter');
-
-
-      
+    {  
+            $filter = $request->input('filter');
             $drawings = Drawing::where('price', '<=', $filter)->where('is_active', 'Active')->get();
-      
 
-     
-       return view('drawings.index')->with('drawings', $drawings);
-
-
+            return view('drawings.index')->with('drawings', $drawings);
     }
+
+    /**
+     * Favorite a particular drawing
+     */
+
+    public function favoriteDrawing(Drawing $drawing)
+    {
+        Auth::user()->favorites()->attach($drawing->id);
+
+        return back();
+    }
+
+    /**
+     * Unfavorite a particular drawing
+     */
+
+    public function unFavoriteDrawing(Drawing $drawing)
+    {
+        Auth::user()->favorites()->detach($drawing->id);
+
+        return back();
+    }
+
 }

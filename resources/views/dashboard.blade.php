@@ -14,7 +14,12 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <li>
+                            <a href="{{ url('my_favorites') }}">My Favorites</a>
+                        </li>
+                        <li>
+                                <a href="{{ url('my_info') }}">My Info</a>
+                            </li>
                 </div>
             </div>
         </div>

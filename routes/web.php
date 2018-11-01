@@ -24,12 +24,23 @@ Route::post('drawings/search', 'DrawingsController@search');
 Route::post('drawings', 'DrawingsController@filter');
 
 
+
 Auth::routes();
 
+Route::get('/my_favorites', 'UserController@myFavorites');
 Route::get('/drawings', 'DrawingsController@index')->name('drawings');
 Route::get('/home', 'UserController@index')->name('home');
+Route::get('/my_info', 'UserController@myInfo');
+Route::get('/edit_my_info', 'UserController@editMyInfo');
+Route::post('/edit_my_info', 'UserController@editMyInfo');
+
+Route::post('favorite/{drawing}', 'DrawingsController@favoriteDrawing');
+Route::post('unfavorite/{drawing}', 'DrawingsController@unFavoriteDrawing');
+
+
 
 Route::group(['middleware' => ['auth', 'admin']], function(){
+    Route::post('/admin/create', 'DrawingsController@store');
     Route::get('/admin', 'AdminController@index')->name('admin_dashboard');
     Route::get('/admin/create', 'DrawingsController@create')->name('create');
     Route::any('isActive/{id}', [
