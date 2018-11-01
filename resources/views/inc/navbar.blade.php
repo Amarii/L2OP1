@@ -30,7 +30,7 @@
                             {{Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Drawing Name / Price'])}}
                             
   
-                            {{Form::select('price', array('filter1' => '1 - 10', 'filter2' => '11 - 20', 'filter3' => '21 - 30'))}}
+                       
                                 
                     
                 

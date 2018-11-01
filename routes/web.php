@@ -21,6 +21,7 @@ Route::get('/about', function () {
 // Resources
 Route::resource('drawings', 'DrawingsController');
 Route::post('drawings/search', 'DrawingsController@search');
+Route::post('drawings', 'DrawingsController@filter');
 
 
 Auth::routes();

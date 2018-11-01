@@ -198,16 +198,30 @@ class DrawingsController extends Controller
     {
         $search = $request->input('name');
         $filter = $request->input('price');
-        if($filter == 'filter1'){
-            $price = 10;
-        }
+
 
         if($search != ''){
-            $drawings = Drawing::where('name', 'LIKE', '%' .$search. '%')->orWhere('price', $search)->where('price', $price)->where('is_active', 'Active')->get();
+            $drawings = Drawing::where('name', 'LIKE', '%' .$search. '%')->orWhere('price', $search)->where('is_active', 'Active')->get();
         }
        else{
            $drawings = [];
        }
+     
+       return view('drawings.index')->with('drawings', $drawings);
+
+
+    }
+
+    public function filter(Request $request)
+    {
+       
+        $filter = $request->input('filter');
+
+
+      
+            $drawings = Drawing::where('price', '<=', $filter)->where('is_active', 'Active')->get();
+      
+
      
        return view('drawings.index')->with('drawings', $drawings);
 
