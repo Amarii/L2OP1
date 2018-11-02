@@ -1,10 +1,10 @@
 <template>
     <span>
         <a href="#" v-if="isFavorited" @click.prevent="unFavorite(drawing)">
-            <i class="fab fa-angellist"></i>
+             <i  class="fa fa-star"></i>
         </a>
         <a href="#" v-else @click.prevent="favorite(drawing)">
-            <i class="fab fa-angellist"></i>
+            <i  class="fa fa-star-o"></i>
         </a>
     </span>
 </template>
