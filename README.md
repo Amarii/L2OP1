@@ -34,3 +34,5 @@
             •Weet wat komt kijken bij deployment naar een live/productie omgeving
             •Snap waar al je configuraties binnen jouw framework staan•kanuitleggen hoe en wat moet worden aangepast voor een ‘publish’ naar productie
             •(pre = Heb de O & P uit de OTAP verwerkt in je project)
+           
+![alt text](images/list.png)
