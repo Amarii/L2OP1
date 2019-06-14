@@ -1,5 +1,5 @@
-Praktijkopdracht
-    •Beveiliging
+    Praktijkopdracht
+        •Beveiliging
         •Inloggen: bepaalde functionaliteit is afgeschermd voor alleen ingelogde gebruikers, maakt niet uit welke gebruiker, als je maar                     bent ingelogd als rol ‘gebruiker’
         
         •Validatie: bij invoervelden wordt gebruik gemaakt van verplichte velden, en/of velden met controle op inhoud (denk aan een postcode of emailadres), gebruiker krijgt foutmeldingen te zien (deze zijn NIET te omzeilen door bijv. javascript uit te zetten...)
